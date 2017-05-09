@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <servlet>
+        <servlet-name>ToDoServlet</servlet-name>
+        <servlet-class>ToDo.ToDoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ToDoServlet</servlet-name>
+        <url-pattern>/todo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateStatus</servlet-name>
+        <servlet-class>ToDo.UpdateStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateStatus</servlet-name>
+        <url-pattern>/upstatus</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteToDo</servlet-name>
+        <servlet-class>ToDo.DeleteToDo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteToDo</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+</web-app>

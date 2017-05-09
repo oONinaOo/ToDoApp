@@ -1,0 +1,11 @@
+.fadeOnLoad{
+    color : red;
+}
+
+.active{
+    color:blue;
+}
+
+.completed {
+    color: violet;
+}
