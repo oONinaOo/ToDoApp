@@ -1,6 +1,11 @@
-package ToDo;
+package ToDo.Servlet;
 
+import ToDo.Model.ToDoDAO;
+import ToDo.Model.ToDoMem;
+import ToDo.Model.Todo;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,24 +15,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet(name = "UpdateStatus")
-public class UpdateStatus extends HttpServlet {
+
+@WebServlet(name = "DeleteToDo")
+public class DeleteToDo extends HttpServlet {
     ToDoDAO todoDao = ToDoMem.INSTANCE;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = request.getReader();
         String line;
-        while ((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             buffer.append(line);
         }
         String data = buffer.toString();
 
-        ObjectMapper readChange = new ObjectMapper();
-        DataManager change = readChange.readValue(data, DataManager.class);
-        for (DataManager todo : todoDao.getTodos()){
-            if (todo.getID() == change.getID()){
-                todoDao.toggleStatus(todo.getID());
-            }
+        JsonParser parser = new JsonParser();
+        Object object = parser.parse(data);
+        JsonArray array = (JsonArray) object;
+
+        for (int i = 0; i < array.size(); i++) {
+            ObjectMapper readDelete = new ObjectMapper();
+            Todo delete = readDelete.readValue(array.get(i).toString(), Todo.class);
+            todoDao.deleteTodo(delete.getID());
         }
     }
 

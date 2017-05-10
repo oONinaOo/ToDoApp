@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>ToDoServlet</servlet-name>
-        <servlet-class>ToDo.ToDoServlet</servlet-class>
+        <servlet-class>ToDo.Servlet.ToDoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ToDoServlet</servlet-name>
@@ -13,7 +13,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>UpdateStatus</servlet-name>
-        <servlet-class>ToDo.UpdateStatus</servlet-class>
+        <servlet-class>ToDo.Servlet.UpdateStatus</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateStatus</servlet-name>
@@ -21,18 +21,10 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteToDo</servlet-name>
-        <servlet-class>ToDo.DeleteToDo</servlet-class>
+        <servlet-class>ToDo.Servlet.DeleteToDo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteToDo</servlet-name>
         <url-pattern>/delete</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AddTodo</servlet-name>
-        <servlet-class>ToDo.AddTodo</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddTodo</servlet-name>
-        <url-pattern>/add</url-pattern>
     </servlet-mapping>
 </web-app>

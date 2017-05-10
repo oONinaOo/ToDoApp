@@ -1,6 +1,9 @@
-package ToDo;
+package ToDo.Servlet;
 
 
+import ToDo.Model.ToDoDAO;
+import ToDo.Model.ToDoMem;
+import ToDo.Model.Todo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
@@ -19,8 +22,13 @@ public class ToDoServlet extends javax.servlet.http.HttpServlet {
         }
         String name = buffer.toString();
 
-        DataManager newTodo = todoDao.addTodo(name);
+        Todo newTodo = todoDao.addTodo(name);
         todoDao.getTodos().add(newTodo);
+
+        int sizeOfTodos = todoDao.getTodos().size();
+
+        ObjectMapper getList = new ObjectMapper();
+        getList.writer().writeValue(response.getOutputStream(), todoDao.getTodo(sizeOfTodos));
 
     }
 

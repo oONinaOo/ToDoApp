@@ -15,23 +15,15 @@ function addTodo() {
             url: "/todo",
             type: 'POST',
             data: todoValue,
-            success: function () {
-                $.ajax({
-                    url: "/add",
-                    type: 'GET',
-                    success: function(data){
-                        console.log(data);
-                        var newTodo = JSON.parse(data);
-                        $("#todoList").append("<div id= 'div" + newTodo.id + "' class='active'><input type='checkbox' name = 'checkbox' value = '" + newTodo.active + "' id='" + newTodo.id + "'>" + newTodo.name + "</div>");
-                        $('#div'+ newTodo.id).hide();
-                        $('#div'+ newTodo.id).fadeIn(500);
-                        checkBox();
-                    }
-
-                });
+            success: function (data) {
+                var newTodo = JSON.parse(data);
+                $("#todoList").append("<div id= 'div" + newTodo.id + "' class='active'><input type='checkbox' name = 'checkbox' value = '" + newTodo.active + "' id='" + newTodo.id + "'>" + newTodo.name + "</div>");
+                $('#div' + newTodo.id).hide();
+                $('#div' + newTodo.id).fadeIn(500);
+                checkBox();
             }
-
         });
+
 }
 
 function getTodos(){

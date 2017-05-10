@@ -1,23 +1,23 @@
-package ToDo;
+package ToDo.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoMem implements ToDoDAO {
     public static final ToDoDAO INSTANCE = new ToDoMem();
-    public static final List<DataManager> toDos = new ArrayList<>();
+    public final List<Todo> toDos = new ArrayList<>();
 
     private ToDoMem(){
 
     }
 
     @Override
-    public List<DataManager> getTodos() {
+    public List<Todo> getTodos() {
         return toDos;
     }
 
     @Override
-    public DataManager getTodo(int ID) {
+    public Todo getTodo(int ID) {
         for (int i=0; i<toDos.size(); i++){
             if(toDos.get(i).getID() == ID){
                 return toDos.get(i);
@@ -26,8 +26,8 @@ public class ToDoMem implements ToDoDAO {
     }
 
     @Override
-    public DataManager addTodo(String name) {
-         return new DataManager(toDos.size()+1, name, true);
+    public Todo addTodo(String name) {
+         return new Todo(toDos.size()+1, name, true);
     }
 
     @Override

@@ -1,22 +1,22 @@
-package ToDo;
+package ToDo.Model;
 
-public class DataManager {
+public class Todo {
     private int ID;
     private String name;
     private boolean isActive;
 
-    public DataManager( int ID, String name, boolean isActive) {
+    public Todo(int ID, String name, boolean isActive) {
         this.ID = ID;
         this.name = name;
         this.isActive = isActive;
     }
-    public DataManager (String ID, String name, boolean isActive){
+    public Todo(String ID, String name, boolean isActive){
         this.ID = Integer.valueOf(ID);
         this.name = name;
         this.isActive = isActive;
     }
 
-    public DataManager() {
+    public Todo() {
     }
 
     public String getName() {
