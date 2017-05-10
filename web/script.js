@@ -14,10 +14,24 @@ function addTodo() {
         $.ajax({
             url: "/todo",
             type: 'POST',
-            data: todoValue
+            data: todoValue,
+            success: function () {
+                $.ajax({
+                    url: "/add",
+                    type: 'GET',
+                    success: function(data){
+                        console.log(data);
+                        var newTodo = JSON.parse(data);
+                        $("#todoList").append("<div id= 'div" + newTodo.id + "' class='active'><input type='checkbox' name = 'checkbox' value = '" + newTodo.active + "' id='" + newTodo.id + "'>" + newTodo.name + "</div>");
+                        $('#div'+ newTodo.id).hide();
+                        $('#div'+ newTodo.id).fadeIn(500);
+                        checkBox();
+                    }
+
+                });
+            }
 
         });
-        location.reload();
 }
 
 function getTodos(){
@@ -28,10 +42,10 @@ function getTodos(){
         success: function (data) {
             $.each(JSON.parse(data), function (index, element) {
                 if (element.active == true) {
-                    $("#todoList").append("<div class='active'><input type='checkbox' class='active' name = 'checkbox' value = '" + element.active + "' id='" + element.id + "'>" + element.name + "</div>");
+                    $("#todoList").append("<div id= 'div" + element.id + "' class='active'><input type='checkbox' name = 'checkbox' value = '" + element.active + "' id='" + element.id + "'>" + element.name + " </div>");
                 }
                 else {
-                    $("#todoList").append("<div class='completed'><input type='checkbox' checked=checked name = 'checkbox' value = '" + element.active + "' id='" + element.id + "'>" + element.name + "</div>");
+                    $("#todoList").append("<div id= 'div" + element.id + "' class='completed'><input type='checkbox' checked=checked name = 'checkbox' value = '" + element.active + "' id='" + element.id + "'>" + element.name + "</div>");
                 }
             });
             checkBox();
@@ -106,6 +120,15 @@ function checkBox() {
         checked.name = this.name;
         checked.id = this.id;
         checked.active = this.checked;
+        if(this.checked == true){
+
+            $('#div' + this.id).removeClass("active").addClass("completed") ;
+            $('#div' + this.id).show();
+        }
+        if (this.checked == false){
+            $('#div' + this.id).removeClass("completed").addClass("active");
+            $('#div' + this.id).show();
+        }
 
         $.ajax({
             url: "/upstatus",
@@ -113,7 +136,6 @@ function checkBox() {
             data: JSON.stringify(checked)
 
         });
-        location.reload();
 
     });
 }
